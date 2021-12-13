@@ -329,7 +329,7 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 	var instructions = {
 		type: 'html-button-response',
 		stimulus: function(){
-			if (condition_order.first == 'visual') {
+			if (condition_order.first == 'audio') { //updated for second session
 				return 'You will see images of indoor and outdoor scenes and hear natural and manmade sounds.' +
 				`<br><br>When you see an <strong>${condition_order.visual_freq} scene</strong>, press the <strong>spacebar</strong>.` +
 					`<br>When you see an <strong>${condition_order.visual_target} scene</strong>, do not press any buttons` +
@@ -438,8 +438,6 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 
 			},
 
-
-
 			prompt: function(){
 				if (dir_ind[l] < 2){
 					if (dir_ind[l] == 0){
@@ -478,7 +476,7 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 	var begin_practice = {
 		type: 'html-keyboard-response',
 		stimulus: function(){
-			if (condition_order.first == 'visual') {
+			if (condition_order.first == 'audio') {//updated for second session
 			return 'First we will practice.' +
 				`<br>Remember, when you see an <strong>${condition_order.visual_freq} scene</strong>, press the <strong>spacebar</strong>.` +
 					`<br>When you see an <strong>${condition_order.visual_target} scene</strong>, do not press any buttons.` + '<br><br> Press the spacebar to begin.'
@@ -5271,7 +5269,7 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 		type: 'preload',
 		message: 'Loading',
 		images: function(){
-				if (condition_order.visual_freq == 'indoor'){
+				if (condition_order.visual_freq == 'outdoor'){//updated for second session
 			return [shuffled_images_in_freq, foil_images1, practice_images_in_freq]
 				} else {
 					return [shuffled_images_out_freq, foil_images1, practice_images_out_freq]
@@ -5279,7 +5277,7 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 		},
 		
 		audio: function(){
-			if (condition_order.audio_freq == 'natural'){
+			if (condition_order.audio_freq == 'manmade'){//updated for second session
 				return [shuffled_sounds_nat_freq, foil_sounds1, practice_sounds_nat_freq, practice_sounds_man_freq, t, 'static/img/silence.wav']
 			} else {
 				return [shuffled_sounds_man_freq, foil_sounds1, practice_sounds_man_freq, practice_sounds_nat_freq, t, 'static/img/silence.wav']
@@ -7835,8 +7833,8 @@ jsPsych.data.addProperties({Stimuli_outdoor_natural: prac_out_nat})
 
 
 var prac_stimuli;
-	if (condition_order.visual_freq == 'indoor'){
-		if (condition_order.audio_freq == 'manmade'){
+	if (condition_order.visual_freq == 'outdoor'){//updated for second session
+		if (condition_order.audio_freq == 'natural'){//updated for second session
 			console.log('prac_stim',prac_in_man)
 			prac_stimuli = prac_in_man
 		} else {
@@ -7844,7 +7842,7 @@ var prac_stimuli;
 			prac_stimuli = prac_in_nat
 		}
 	} else {
-		if (condition_order.audio_freq == 'manmade'){
+		if (condition_order.audio_freq == 'natural'){//updated for second session
 			console.log('prac_stim',prac_out_man)
 			prac_stimuli = prac_out_man
 		} else {
@@ -7912,7 +7910,7 @@ let p_ct = 0
 				on_start: function(data){
 					p_ct++
 					//  The following is the accuracy test
-					if (condition_order.first == 'visual'){
+					if (condition_order.first == 'audio'){//updated for second session
 						if (condition_order.visual_freq == 'indoor'){
 							if (jsPsych.currentTrial().data.Prac_Image[11] == 'I') {
 								jsPsych.data.addProperties({correct_response: ' ', trial_count: p_ct})

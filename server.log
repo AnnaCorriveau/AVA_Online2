@@ -20324,3 +20324,114 @@ RuntimeError: Missing one of the following templates: thanks-mturksubmit.html, c
 2021-12-10 16:20:19,017 insert_mode_failed (1020) {'hitId': 'debugU16cJ', 'assignmentId': 'debug1V0Hg', 'workerId': 'debugQHV99', 'mode': 'debug'}
 2021-12-10 16:26:58,783 insert_mode_failed (1020) {'hitId': 'debugU16cJ', 'assignmentId': 'debug1V0Hg', 'workerId': 'debugQHV99', 'mode': 'debug'}
 2021-12-10 16:28:15,481 insert_mode_failed (1020) {'hitId': 'debugU16cJ', 'assignmentId': 'debug1V0Hg', 'workerId': 'debugQHV99', 'mode': 'debug'}
+2021-12-13 09:15:03,453 Scheduler started
+2021-12-13 09:15:03,523 Scheduler started
+2021-12-13 09:15:03,665 Scheduler started
+2021-12-13 09:15:03,795 Scheduler started
+2021-12-13 09:15:03,856 Scheduler started
+2021-12-13 09:15:04,020 Scheduler started
+2021-12-13 09:15:04,105 Scheduler started
+2021-12-13 09:15:04,252 Scheduler started
+2021-12-13 09:15:04,393 Scheduler started
+2021-12-13 09:15:04,550 Scheduler started
+2021-12-13 09:15:04,646 Scheduler started
+2021-12-13 09:15:04,708 Scheduler started
+2021-12-13 09:15:04,794 Scheduler started
+2021-12-13 09:15:04,823 Scheduler started
+2021-12-13 09:15:04,841 Scheduler started
+2021-12-13 09:15:04,908 Scheduler started
+2021-12-13 09:15:04,929 Scheduler started
+2021-12-13 09:15:05,002 Scheduler started
+2021-12-13 09:15:05,041 Scheduler started
+2021-12-13 09:15:05,073 Scheduler started
+2021-12-13 09:15:05,102 Scheduler started
+2021-12-13 09:15:05,136 Scheduler started
+2021-12-13 09:15:05,148 Scheduler started
+2021-12-13 09:15:05,158 Scheduler started
+2021-12-13 09:15:05,195 Scheduler started
+2021-12-13 09:15:13,764 insert_mode_failed (1020) {'hitId': 'debugyFMit', 'assignmentId': 'debugNKbCh', 'workerId': 'debug1aJf3', 'mode': 'debug'}
+2021-12-13 09:26:22,573 Scheduler started
+2021-12-13 09:26:22,576 Scheduler started
+2021-12-13 09:26:22,674 Scheduler started
+2021-12-13 09:26:22,813 Scheduler started
+2021-12-13 09:26:22,854 Scheduler started
+2021-12-13 09:26:22,988 Scheduler started
+2021-12-13 09:26:23,287 Scheduler started
+2021-12-13 09:26:23,445 Scheduler started
+2021-12-13 09:26:23,526 Scheduler started
+2021-12-13 09:26:23,628 Scheduler started
+2021-12-13 09:26:23,699 Scheduler started
+2021-12-13 09:26:23,702 Scheduler started
+2021-12-13 09:26:23,754 Scheduler started
+2021-12-13 09:26:23,775 Scheduler started
+2021-12-13 09:26:23,861 Scheduler started
+2021-12-13 09:26:23,900 Scheduler started
+2021-12-13 09:26:23,954 Scheduler started
+2021-12-13 09:26:24,000 Scheduler started
+2021-12-13 09:26:24,003 Scheduler started
+2021-12-13 09:26:24,013 Scheduler started
+2021-12-13 09:26:24,037 Scheduler started
+2021-12-13 09:26:24,062 Scheduler started
+2021-12-13 09:26:24,088 Scheduler started
+2021-12-13 09:26:24,123 Scheduler started
+2021-12-13 09:26:24,132 Scheduler started
+2021-12-13 09:26:44,724 insert_mode_failed (1020) {'hitId': 'debugqatfz', 'assignmentId': 'debuguXlMb', 'workerId': 'debugLKuPd', 'mode': 'debug'}
+2021-12-13 09:30:22,431 Scheduler started
+2021-12-13 09:30:22,440 Scheduler started
+2021-12-13 09:30:22,540 Scheduler started
+2021-12-13 09:30:22,638 Scheduler started
+2021-12-13 09:30:22,789 Scheduler started
+2021-12-13 09:30:22,937 Scheduler started
+2021-12-13 09:30:22,978 Scheduler started
+2021-12-13 09:30:23,103 Scheduler started
+2021-12-13 09:30:23,235 Scheduler started
+2021-12-13 09:30:23,277 Scheduler started
+2021-12-13 09:30:23,342 Scheduler started
+2021-12-13 09:30:23,558 Scheduler started
+2021-12-13 09:30:23,631 Scheduler started
+2021-12-13 09:30:23,777 Scheduler started
+2021-12-13 09:30:23,902 Scheduler started
+2021-12-13 09:30:23,926 Scheduler started
+2021-12-13 09:30:23,956 Scheduler started
+2021-12-13 09:30:23,971 Scheduler started
+2021-12-13 09:30:23,983 Scheduler started
+2021-12-13 09:30:24,023 Scheduler started
+2021-12-13 09:30:24,051 Scheduler started
+2021-12-13 09:30:24,072 Scheduler started
+2021-12-13 09:30:24,097 Scheduler started
+2021-12-13 09:30:24,139 Scheduler started
+2021-12-13 09:30:24,159 Scheduler started
+2021-12-13 09:30:26,621 insert_mode_failed (1020) {'hitId': 'debug8LE4s', 'assignmentId': 'debugHwinb', 'workerId': 'debugwvsyx', 'mode': 'debug'}
+2021-12-13 09:31:09,604 insert_mode_failed (1020) {'hitId': 'debug8LE4s', 'assignmentId': 'debugHwinb', 'workerId': 'debugwvsyx', 'mode': 'debug'}
+2021-12-13 09:31:26,078 insert_mode_failed (1020) {'hitId': 'debug8LE4s', 'assignmentId': 'debugHwinb', 'workerId': 'debugwvsyx', 'mode': 'debug'}
+2021-12-13 09:31:31,025 insert_mode_failed (1020) {'hitId': 'debug8LE4s', 'assignmentId': 'debugHwinb', 'workerId': 'debugwvsyx', 'mode': 'debug'}
+2021-12-13 09:40:02,317 Scheduler started
+2021-12-13 09:40:02,392 Scheduler started
+2021-12-13 09:40:02,549 Scheduler started
+2021-12-13 09:40:02,582 Scheduler started
+2021-12-13 09:40:02,590 Scheduler started
+2021-12-13 09:40:02,831 Scheduler started
+2021-12-13 09:40:02,984 Scheduler started
+2021-12-13 09:40:03,148 Scheduler started
+2021-12-13 09:40:03,218 Scheduler started
+2021-12-13 09:40:03,389 Scheduler started
+2021-12-13 09:40:03,524 Scheduler started
+2021-12-13 09:40:03,691 Scheduler started
+2021-12-13 09:40:03,729 Scheduler started
+2021-12-13 09:40:03,809 Scheduler started
+2021-12-13 09:40:03,831 Scheduler started
+2021-12-13 09:40:03,852 Scheduler started
+2021-12-13 09:40:03,858 Scheduler started
+2021-12-13 09:40:03,865 Scheduler started
+2021-12-13 09:40:03,925 Scheduler started
+2021-12-13 09:40:03,973 Scheduler started
+2021-12-13 09:40:04,009 Scheduler started
+2021-12-13 09:40:04,033 Scheduler started
+2021-12-13 09:40:04,060 Scheduler started
+2021-12-13 09:40:04,088 Scheduler started
+2021-12-13 09:40:04,120 Scheduler started
+2021-12-13 09:40:08,634 insert_mode_failed (1020) {'hitId': 'debugb8qpt', 'assignmentId': 'debug1ETDp', 'workerId': 'debugl7NSR', 'mode': 'debug'}
+2021-12-13 09:41:59,515 insert_mode_failed (1020) {'hitId': 'debugb8qpt', 'assignmentId': 'debug1ETDp', 'workerId': 'debugl7NSR', 'mode': 'debug'}
+2021-12-13 09:49:49,513 insert_mode_failed (1020) {'hitId': 'debugnimPe', 'assignmentId': 'debugj3Q1J', 'workerId': 'debugOlLho', 'mode': 'debug'}
+2021-12-13 09:56:14,733 insert_mode_failed (1020) {'hitId': 'debugnimPe', 'assignmentId': 'debugj3Q1J', 'workerId': 'debugOlLho', 'mode': 'debug'}
+2021-12-13 09:57:20,035 insert_mode_failed (1020) {'hitId': 'debugnimPe', 'assignmentId': 'debugj3Q1J', 'workerId': 'debugOlLho', 'mode': 'debug'}
