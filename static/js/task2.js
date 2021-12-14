@@ -60,15 +60,36 @@ console.log('mycounterbalance check', mycounterbalance)
 // 	return trial;
 //   }
   // capture info from Prolific
-  var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
-  console.log('FIRST subID', subject_id)
+//   var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+  var subject_id = 'Anna1234';
   var study_id = jsPsych.data.getURLVariable('STUDY_ID');
   var session_id = jsPsych.data.getURLVariable('SESSION_ID');
   if(subject_id == null){
     // string is empty, do something
 	var subject_id = jsPsych.data.getURLVariable('assignmentId');
-	console.log('SubID_test', subject_id)
 	}
+	console.log('SubID_test', subject_id)
+	const reducer = (previousValue, currentValue) => previousValue + currentValue;
+
+	var num = subject_id.match(/\d+/g)
+	console.log('NUM',num)
+	var num_smush = num.reduce(reducer);
+	console.log('Sum NUM', num_smush);
+
+
+// 	# SET UP from PsychoPy script - how to calculate condition from subject number
+// if int(expInfo['participant']):
+//     sn = int(expInfo['participant'])
+// else:
+//     sn = 8
+    
+// condition = int(8 * ((sn/8) - math.floor(sn/8))) + 1
+// print(condition)
+
+var condy = 8 * ((num_smush/8) - Math.floor(num_smush/8)) + 1;
+console.log('Which condition?', condy)
+
+
 var strsub1 = subject_id.substring(0,3)
 var strsub2 = subject_id.substring(0,4)
 var strsub3 = subject_id.substring(0,5)
@@ -85,11 +106,25 @@ Math.seedrandom(subject_id)
 
 
 
-var condition_order = counterbalanceKey[cond];
+var condition_order = counterbalanceKey[condy];
 console.log('condition order', condition_order)
 
 
+	var num = subject_id.match(/(\d+)/);
+	console.log('NUM',num)
 
+
+// 	# SET UP from PsychoPy script - how to calculate condition from subject number
+// if int(expInfo['participant']):
+//     sn = int(expInfo['participant'])
+// else:
+//     sn = 8
+    
+// condition = int(8 * ((sn/8) - math.floor(sn/8))) + 1
+// print(condition)
+
+var condy = 8 * ((num/8) - Math.floor(num/8)) + 1;
+console.log('Which condition?', condy)
 
 
 const dm = new DataManager();
