@@ -65,6 +65,7 @@ def my_custom_view():
 #    except TemplateNotFound:
 #        abort(404)
 
+
 # ----------------------------------------------
 # example computing bonus
 # ----------------------------------------------
@@ -100,3 +101,11 @@ def compute_bonus():
         return jsonify(**resp)
     except:
         abort(404)  # again, bad to display HTML, but...
+
+
+
+@custom_code.route('/end', methods=['GET'])
+def end():
+    return 'https://app.prolific.co/submissions/complete?cc=2467AADE'
+    # return 'https://app.prolific.co/submissions/complete?cc=59CD2095'
+

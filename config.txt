@@ -62,7 +62,7 @@
 # Server domain name for publicly-accessible route to psiturk server.
 # If running on heroku, set this to your heroku app url --
 # e.g., "ad_url_domain = example-app.herokuapp.com"
-ad_url_domain = https://shielded-inlet-73266.herokuapp.com/
+ad_url_domain = https://shielded-inlet-73266.herokuapp.com/?PROLIFIC_PID={{%PROLIFIC_PID%}}&STUDY_ID={{%STUDY_ID%}}&SESSION_ID={{%SESSION_ID%}}
 
 # Server port for publicly-accessible route to psiturk server
 ;ad_url_port = 443
@@ -86,7 +86,7 @@ ad_url_domain = https://shielded-inlet-73266.herokuapp.com/
 [Database Parameters]
 # Participant data will be stored in this database.
 # If ON_CLOUD=1, then this defaults to env var $DATABASE_URL, if set.
-;database_url = sqlite:///participants.db
+database_url = postgresql://iwceghfiotsvpv:b5d1ff9021b855ffd99df2510a71f3721759f32cbfc178540ffe683baa9091de@ec2-52-201-106-191.compute-1.amazonaws.com:5432/df25agfebtec86
 
 # Name of the database table where participant data will be stored
 ;table_name = assignments

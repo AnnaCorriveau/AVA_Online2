@@ -22,6 +22,10 @@ var mycounterbalance = counterbalance;  // they tell you which condition you hav
 
 
 
+
+
+$(window).ready(function(){
+
 // they are not used in the stroop code but may be useful to you
 const cond = psiTurk.taskdata.get('condition');
 console.log('condition check',cond)
@@ -29,35 +33,62 @@ console.log('mycondition check', mycondition)
 console.log('mycounterbalance check', mycounterbalance)
 
 
-function getProlificId(cond){
-	var trial = {
-	  type: 'survey-text',
-	  on_finish: function(data) {
-		const subjectId = data['response']['prolific_id'];
-		var sub = subjectId	
+  
+// function getProlificId(cond){
+// 	var trial = {
+// 	  type: 'survey-text',
+// 	  on_finish: function(data) {
+// 		const subjectId = data['response']['prolific_id'];
+// 		var sub = subjectId	
 		
-		jsPsych.data.addProperties({
-		  // record the condition assignment in the jsPsych data
-		  condition: cond,
-		  // this adds a property called ‘subject’ to every trial
-		  subject: subjectId,
-		  expStartTime: jsPsych.startTime(),
-		});
-	  },
-	  questions: [
-		{prompt: "<h2>What is your Prolific ID?</h2><br><br>",
-		 placeholder: '111111111111', required: true,
-		 name: 'prolific_id',
-	   }
-	  ],
-	};
-	return trial;
-  }
+// 		jsPsych.data.addProperties({
+// 		  // record the condition assignment in the jsPsych data
+// 		  condition: cond,
+// 		  // this adds a property called ‘subject’ to every trial
+// 		  subject: subjectId,
+// 		  expStartTime: jsPsych.startTime(),
+// 		});
+// 	  },
+// 	  questions: [
+// 		{prompt: "<h2>What is your Prolific ID?</h2><br><br>",
+// 		 placeholder: '111111111111', required: true,
+// 		 name: 'prolific_id',
+// 	   }
+// 	  ],
+// 	};
+// 	console.log('TRIAL QUESTION', trial)
+// 	return trial;
+//   }
+  // capture info from Prolific
+  var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+  console.log('FIRST subID', subject_id)
+  var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+  var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+  if(subject_id == null){
+    // string is empty, do something
+	var subject_id = jsPsych.data.getURLVariable('assignmentId');
+	console.log('SubID_test', subject_id)
+	}
+var strsub1 = subject_id.substring(0,3)
+var strsub2 = subject_id.substring(0,4)
+var strsub3 = subject_id.substring(0,5)
+var strsub4 = subject_id.substring(0,6)
+//   console.log('assignment_ID', assignment_id)
 
-Math.seedrandom('test')
+  jsPsych.data.addProperties({
+    subject_id: subject_id,
+    study_id: study_id,
+    session_id: session_id
+  });
+
+Math.seedrandom(subject_id)
+
+
 
 var condition_order = counterbalanceKey[cond];
 console.log('condition order', condition_order)
+
+
 
 
 
@@ -165,10 +196,10 @@ var instructionPages = [ // add as a list as many pages as you like
 
 
 /********************/
-$(window).ready(function(){
+// $(window).ready(function(){
 
 
-
+// });
 	// NOTE to ANNA: These are temporary stimuli (not the ones QCed by Lucy and Anthony) - put in real stimuli once they are gathered
 	// To do:
 	//  Make sure stimuli are good
@@ -329,17 +360,17 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 	var instructions = {
 		type: 'html-button-response',
 		stimulus: function(){
-			if (condition_order.first == 'audio') { //updated for second session
+			if (condition_order.first == 'audio') { // Updated for second session
 				return 'You will see images of indoor and outdoor scenes and hear natural and manmade sounds.' +
-				`<br><br>When you see an <strong>${condition_order.visual_freq} scene</strong>, press the <strong>spacebar</strong>.` +
-					`<br>When you see an <strong>${condition_order.visual_target} scene</strong>, do not press any buttons` +
+				`<br><br>When you see an <strong>${condition_order.visual_target} scene</strong>, press the <strong>spacebar</strong>.` +// Updated for second session
+					`<br>When you see an <strong>${condition_order.visual_freq} scene</strong>, do not press any buttons` +// Updated for second session
 					"<br><br> You will not need to do anything with the sounds in the first part of the experiment," +
 					" <br>but keep your volume on because they will be important later."+
 					'<br><br> Your compensation will depend on keeping the volume on during the whole experiment.'
 				} else {
 					return 'You will see images of indoor and outdoor scenes and hear natural and manmade sounds.' +
-					`<br><br>When you hear a <strong>${condition_order.audio_freq} sound</strong>, press the <strong>spacebar</strong>.` +
-						`<br>When you hear a <strong>${condition_order.audio_target} sound</strong>, do not press any buttons` +
+					`<br><br>When you hear a <strong>${condition_order.audio_target} sound</strong>, press the <strong>spacebar</strong>.` +// Updated for second session
+						`<br>When you hear a <strong>${condition_order.audio_freq} sound</strong>, do not press any buttons` +// Updated for second session
 						"<br><br> You will not need to do anything with the images in the first part of the experiment," +
 						" <br>but keep your eyes on the screen because they will be important later."+
 						'<br><br> Your compensation will depend on paying attention during the whole experiment.'
@@ -438,6 +469,8 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 
 			},
 
+
+
 			prompt: function(){
 				if (dir_ind[l] < 2){
 					if (dir_ind[l] == 0){
@@ -476,14 +509,14 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 	var begin_practice = {
 		type: 'html-keyboard-response',
 		stimulus: function(){
-			if (condition_order.first == 'audio') {//updated for second session
+			if (condition_order.first == 'audio') {// Updated for second session
 			return 'First we will practice.' +
-				`<br>Remember, when you see an <strong>${condition_order.visual_freq} scene</strong>, press the <strong>spacebar</strong>.` +
-					`<br>When you see an <strong>${condition_order.visual_target} scene</strong>, do not press any buttons.` + '<br><br> Press the spacebar to begin.'
+				`<br>Remember, when you see an <strong>${condition_order.visual_target} scene</strong>, press the <strong>spacebar</strong>.` + // Updated for second session
+					`<br>When you see an <strong>${condition_order.visual_freq} scene</strong>, do not press any buttons.` + '<br><br> Press the spacebar to begin.' // Updated for second session
 			} else {
 				return 'First we will practice.' +
-				`<br>Remember, when you hear a <strong>${condition_order.audio_freq} sound</strong>, press the <strong>spacebar</strong>.` +
-					`<br>When you hear a <strong>${condition_order.audio_target} sound</strong>, do not press any buttons.` + '<br><br> Press the spacebar to begin.'
+				`<br>Remember, when you hear a <strong>${condition_order.audio_target} sound</strong>, press the <strong>spacebar</strong>.` +
+					`<br>When you hear a <strong>${condition_order.audio_freq} sound</strong>, do not press any buttons.` + '<br><br> Press the spacebar to begin.'
 			}
 		},
 		choices: [' '],
@@ -3463,12 +3496,14 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 	const in_sub1 = indoor_shuffle.slice(0,450);
 	const out_sub1 = outdoor_shuffle.slice(0,50);
 	const images_in_freq = in_sub1.concat(out_sub1);
+	Math.seedrandom(strsub1)
 	const shuffled_images_in_freq = jsPsych.randomization.shuffle(images_in_freq);
 
 	// Slice for session where outdoor is frequent category
 	const in_sub2 = indoor_shuffle.slice(450,500);
 	const out_sub2 = outdoor_shuffle.slice(50,500);
 	const images_out_freq = out_sub2.concat(in_sub2);
+	Math.seedrandom(strsub2)
 	const shuffled_images_out_freq = jsPsych.randomization.shuffle(images_out_freq);
 
 
@@ -5223,7 +5258,7 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 	  const p_man_sub2 = p_man_shuff.slice(27,30);
 	  const p_nat_sub2 = p_nat_shuff.slice(3,30);
 	  const prac_sounds_nat_freq = p_man_sub2.concat(p_nat_sub2);
-	  console.log('prac_sounds_nat_freq',prac_sounds_nat_freq)
+	  console.log('prac_sounds_nat_freq',prac_sounds_nat_freq)	
 	  const practice_sounds_nat_freq = jsPsych.randomization.shuffle(prac_sounds_nat_freq);
 
 
@@ -5236,12 +5271,14 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 	const man_sub1 = man_shuffle.slice(0,450);
 	const nat_sub1 = nat_shuffle.slice(0,50);
 	const sounds_man_freq = nat_sub1.concat(man_sub1);
+	Math.seedrandom(strsub3)
 	const shuffled_sounds_man_freq = jsPsych.randomization.shuffle(sounds_man_freq);
 
 	// Slice for session where natural is frequent
 	const man_sub2 = man_shuffle.slice(450,500);
 	const nat_sub2 = nat_shuffle.slice(50,500);
 	const sounds_nat_freq = man_sub2.concat(nat_sub2);
+	Math.seedrandom(strsub4)
 	const shuffled_sounds_nat_freq = jsPsych.randomization.shuffle(sounds_nat_freq);
 
 
@@ -5269,7 +5306,7 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 		type: 'preload',
 		message: 'Loading',
 		images: function(){
-				if (condition_order.visual_freq == 'outdoor'){//updated for second session
+				if (condition_order.visual_freq == 'indoor'){
 			return [shuffled_images_in_freq, foil_images1, practice_images_in_freq]
 				} else {
 					return [shuffled_images_out_freq, foil_images1, practice_images_out_freq]
@@ -5277,7 +5314,7 @@ var PANAS_options = ['Very slightly or not at all', 'A little', 'Moderately', 'Q
 		},
 		
 		audio: function(){
-			if (condition_order.audio_freq == 'manmade'){//updated for second session
+			if (condition_order.audio_freq == 'natural'){
 				return [shuffled_sounds_nat_freq, foil_sounds1, practice_sounds_nat_freq, practice_sounds_man_freq, t, 'static/img/silence.wav']
 			} else {
 				return [shuffled_sounds_man_freq, foil_sounds1, practice_sounds_man_freq, practice_sounds_nat_freq, t, 'static/img/silence.wav']
@@ -7833,8 +7870,8 @@ jsPsych.data.addProperties({Stimuli_outdoor_natural: prac_out_nat})
 
 
 var prac_stimuli;
-	if (condition_order.visual_freq == 'outdoor'){//updated for second session
-		if (condition_order.audio_freq == 'natural'){//updated for second session
+	if (condition_order.visual_freq == 'outdoor'){// Updated for second session
+		if (condition_order.audio_freq == 'natural'){// Updated for second session
 			console.log('prac_stim',prac_in_man)
 			prac_stimuli = prac_in_man
 		} else {
@@ -7842,7 +7879,7 @@ var prac_stimuli;
 			prac_stimuli = prac_in_nat
 		}
 	} else {
-		if (condition_order.audio_freq == 'natural'){//updated for second session
+		if (condition_order.audio_freq == 'natural'){// Updated for second session
 			console.log('prac_stim',prac_out_man)
 			prac_stimuli = prac_out_man
 		} else {
@@ -7910,8 +7947,8 @@ let p_ct = 0
 				on_start: function(data){
 					p_ct++
 					//  The following is the accuracy test
-					if (condition_order.first == 'audio'){//updated for second session
-						if (condition_order.visual_freq == 'indoor'){
+					if (condition_order.first == 'audio'){// Updated for second session
+						if (condition_order.visual_freq == 'outdoor'){// Updated for second session
 							if (jsPsych.currentTrial().data.Prac_Image[11] == 'I') {
 								jsPsych.data.addProperties({correct_response: ' ', trial_count: p_ct})
 								return ' '
@@ -7919,7 +7956,7 @@ let p_ct = 0
 								jsPsych.data.addProperties({correct_response: null, trial_count: p_ct})
 								return null
 							}
-						//  else condition_order.visual_freq == outdoor
+						//  else condition_order.visual_freq == indoor // Updated for second session
 						} else {
 							if (jsPsych.currentTrial().data.Prac_Image[11] == 'O') {
 								jsPsych.data.addProperties({correct_response: ' ', trial_count: p_ct})
@@ -7930,9 +7967,9 @@ let p_ct = 0
 								return null
 							}
 						}
-					// Else condition_order.first == audio
+					// Else condition_order.first == visual // Updated for second session
 					} else {
-						if (condition_order.audio_freq == 'natural'){
+						if (condition_order.audio_freq == 'manmade'){// Updated for second session
 							if (jsPsych.currentTrial().data.Prac_Audio[11] == 'N') {
 								jsPsych.data.addProperties({correct_response: ' ', trial_count: p_ct})
 								return ' '
@@ -7941,7 +7978,7 @@ let p_ct = 0
 								jsPsych.data.addProperties({correct_response: null, trial_count: p_ct})
 								return null
 							}
-							//  else condition_order.visual_freq == outdoor
+							//  else condition_order.visual_freq == indoor // Updated for second session
 						} else {
 							if (jsPsych.currentTrial().data.Prac_Audio[11] == 'M') {
 								jsPsych.data.addProperties({correct_response: ' ', trial_count: p_ct})
@@ -7989,14 +8026,14 @@ let p_ct = 0
 	var after_practice = {
 		type: 'html-keyboard-response',
 		stimulus: function(){
-			if (condition_order.first == 'visual') {
+			if (condition_order.first == 'audio') {// Updated for second session
 				return 'You are now ready to begin the experiment.' +
-				`<br>Remember, when you see an <strong>${condition_order.visual_freq} scene</strong>, press the <strong>spacebar</strong>.` +
-				`<br>When you see an <strong>${condition_order.visual_target} scene</strong>, do not press any buttons.<br><br>Try your best to pay attention for the entire experiment. <br>Please note: if you do not make a response to the vast majority of trials, you will not be eligible for compensation.<br><br> Press the spacebar to begin.`
+				`<br>Remember, when you see an <strong>${condition_order.visual_target} scene</strong>, press the <strong>spacebar</strong>.` +// Updated for second session
+				`<br>When you see an <strong>${condition_order.visual_freq} scene</strong>, do not press any buttons.<br><br>Try your best to pay attention for the entire experiment. <br>Please note: if you do not make a response to the vast majority of trials, you will not be eligible for compensation.<br><br> Press the spacebar to begin.`// Updated for second session
 			} else {
 				return 'You are now ready to begin the experiment.' +
-				`<br>Remember, when you hear a <strong>${condition_order.audio_freq} sound</strong>, press the <strong>spacebar</strong>.` +
-				`<br>When you hear a <strong>${condition_order.audio_target} sound</strong>, do not press any buttons.<br><br>Try your best to pay attention for the entire experiment.<br>Please note: if you do not make a response to the vast majority of trials, you will not be eligible for compensation. <br><br> Press the spacebar to begin.`
+				`<br>Remember, when you hear a <strong>${condition_order.audio_target} sound</strong>, press the <strong>spacebar</strong>.` +// Updated for second session
+				`<br>When you hear a <strong>${condition_order.audio_freq} sound</strong>, do not press any buttons.<br><br>Try your best to pay attention for the entire experiment.<br>Please note: if you do not make a response to the vast majority of trials, you will not be eligible for compensation. <br><br> Press the spacebar to begin.`// Updated for second session
 			
 			}
 		},
@@ -8016,8 +8053,8 @@ let p_ct = 0
 
 
 	var stimuli_pre;
-	if (condition_order.visual_freq == 'indoor'){
-		if (condition_order.audio_freq == 'manmade'){
+	if (condition_order.visual_freq == 'outdoor'){// Updated for second session
+		if (condition_order.audio_freq == 'natural'){// Updated for second session
 			
 			stimuli_pre = stim_in_man
 			console.log('stimuli_pre', stimuli_pre)
@@ -8027,7 +8064,7 @@ let p_ct = 0
 			console.log('stimuli_pre', stimuli_pre)
 		}
 	} else {
-		if (condition_order.audio_freq == 'manmade'){
+		if (condition_order.audio_freq == 'natural'){// Updated for second session
 			
 			stimuli_pre = stim_out_man
 			console.log('stimuli_pre', stimuli_pre)
@@ -8065,15 +8102,6 @@ let p_ct = 0
 
 // DELETE THIS LINE AND UNCOMMENT OTHER SITMULI LINE
  var stimuli = jsPsych.randomization.shuffle(stimuli_pre)
-// var stimuli = [{Image: practice_images_in_freq[2], Audio: practice_sounds_man_freq[2]},
-// {Image: practice_images_in_freq[3], Audio: practice_sounds_man_freq[3]},
-// 	{Image: 'static/img/Indoor_FINAL/I1005.jpg', Audio: practice_sounds_man_freq[1]},
-// 	{Image: practice_images_in_freq[4], Audio: practice_sounds_man_freq[4]},
-// {Image: practice_images_in_freq[5], Audio: practice_sounds_man_freq[5]},
-// ]
-
-
-
 
 
 	// 25 infrequent images + 25 foils
@@ -8087,7 +8115,7 @@ let p_ct = 0
 
 	// var correct_practice_trials = jsPsych.data.get().filter({correct:true, phase: 'practice'});
 	var filter_function = function(){
-		if (condition_order.first == 'visual'){
+		if (condition_order.first == 'audio'){// Updated for second session
 		var frequent_vis_trials = jsPsych.data.get().filter({freq_infreq: 'frequent'})
 		var infrequent_vis_trials = jsPsych.data.get().filter({freq_infreq: 'infrequent'})
 		console.log('frequent_vis_trials', frequent_vis_trials)
@@ -8113,7 +8141,7 @@ let p_ct = 0
 	var infrequent_vis_slice = infrequent_vis_shuffle.slice(0, 25) // image
 	var paired_with_infrequent_vis_slice = paired_with_infrequent_vis_shuffle.slice(0, 25) // sound
 
-	// if (condition_order.first == 'audio'){
+	// if (condition_order.first == 'visual'){// Updated for second session
 	 } else {
 		var frequent_aud_trials = jsPsych.data.get().filter({freq_infreq: 'frequent'})
 		var infrequent_aud_trials = jsPsych.data.get().filter({freq_infreq: 'infrequent'})
@@ -8131,7 +8159,7 @@ let p_ct = 0
 	var paired_with_infrequent_aud_shuffle = jsPsych.randomization.shuffle(paired_with_infrequent_aud)
 
 	 }
-}
+} // end filter function
 
 
 var filter_data = {
@@ -8145,7 +8173,7 @@ var filter_data = {
 
 
 var make_foils;
-if (condition_order.visual_freq == 'indoor'){
+if (condition_order.visual_freq == 'outdoor'){// Updated for second session
 	frequent_foils = in_foil1
 	infrequent_foils = out_foil1.slice(0,25)
 	make_foils = frequent_foils.concat(infrequent_foils)
@@ -8319,7 +8347,7 @@ var mem_vis_stim = jsPsych.randomization.shuffle(memtest_vis_stim_pre)
 
 
 var make_aud_foils;
-if (condition_order.audio_freq == 'natural'){
+if (condition_order.audio_freq == 'manmade'){// Updated for second session
 	frequent_aud_foils = nat_foil1
 	console.log('frequent_aud_foils',frequent_aud_foils)
 	infrequent_aud_foils = man_foil1.slice(0,25)
@@ -8592,10 +8620,8 @@ t_ct++
 
 
 //  The following is the accuracy test
-if (condition_order.first == 'visual'){
-	if (condition_order.visual_freq == 'indoor'){
-		console.log('WRONG', condition_order.visual_freq)
-		console.log('WRONG', data.Image[11])
+if (condition_order.first == 'audio'){// Updated for second session
+	if (condition_order.visual_freq == 'outdoor'){// Updated for second session
 		if (data.Image[11] == 'I') {
 			jsPsych.data.addProperties({freq_infreq: 'frequent'});
 			if (data.response == ' ') {
@@ -8618,10 +8644,8 @@ if (condition_order.first == 'visual'){
 			}
 		}
 
-		//  else condition_order.visual_freq == outdoor
+		//  else condition_order.visual_freq == indoor// Updated for second session
 	} else {
-		console.log('condition_order.visual_freq', condition_order.visual_freq)
-		console.log('data.Image[11]', data.Image[11])
 		if (data.Image[11] == 'O') {
 			
 			jsPsych.data.addProperties({freq_infreq: 'frequent'});
@@ -8649,11 +8673,10 @@ if (condition_order.first == 'visual'){
 
 	}
 
-	// Else condition_order.first == audio
+	// Else condition_order.first == visual // Updated for second session
 } else {
-	if (condition_order.audio_freq == 'natural'){
-		console.log('aud_freq working', 'natural')
-		
+	if (condition_order.audio_freq == 'manmade'){// Updated for second session
+
 		if (data.Audio[11] == 'N') {
 			console.log('data.aud(11)', data.Audio[11])	
 
@@ -8670,7 +8693,6 @@ if (condition_order.first == 'visual'){
 			}
 			//  else data.Audio[11] == 'M'
 		} else {
-			console.log('data.MANFLAG_aud(11)', data.Audio[11])
 
 			if (data.response == ' ') {
 				console.log('data.response', data.response)
@@ -8685,7 +8707,7 @@ if (condition_order.first == 'visual'){
 			}
 		}
 
-		//  else condition_order.audio_freq == manmade
+		//  else condition_order.audio_freq == natural // Updated for second session
 	} else {
 		if (data.Audio[11] == 'M') {
 			
@@ -8837,13 +8859,13 @@ var results = {
 			}
 			
 			// console.log('data?',data)
-			if (condition_order.visual_freq == 'indoor'){
+			if (condition_order.visual_freq == 'outdoor'){// Updated for second session
 				if (data.MemImage[11] == 'I') {
 					jsPsych.data.addProperties({freq_infreq_memvis: 'frequent'});
 				} else if(data.MemImage[11] == 'O') {
 					jsPsych.data.addProperties({freq_infreq_memvis: 'infrequent'});
 				}
-			 } else if (condition_order.visual_freq == 'outdoor'){
+			 } else if (condition_order.visual_freq == 'indoor'){// Updated for second session
 				if (data.MemImage[11] == 'I') {
 					jsPsych.data.addProperties({freq_infreq_memvis: 'infrequent'});
 				} else if(data.MemImage[11] == 'O') {
@@ -8995,13 +9017,13 @@ jsPsych.data.addProperties({displayed_trial: foundKeys_aud});
 			}
 
 			// console.log('data?',data)
-			if (condition_order.audio_freq == 'natural'){
+			if (condition_order.audio_freq == 'manmade'){// Updated for second session
 				if (data.stimulus[11] == 'N') {
 					jsPsych.data.addProperties({freq_infreq_memaud: 'frequent'});
 				} else if(data.stimulus[11] == 'M') {
 					jsPsych.data.addProperties({freq_infreq_memaud: 'infrequent'});
 				}
-			 } else if (condition_order.audio_freq == 'manmade'){
+			 } else if (condition_order.audio_freq == 'natural'){// Updated for second session
 				if (data.stimulus[11] == 'N') {
 					jsPsych.data.addProperties({freq_infreq_memaud: 'infrequent'});
 				} else if(data.stimulus[11] == 'M') {
@@ -9114,51 +9136,27 @@ jsPsych.data.addProperties({displayed_trial: foundKeys_aud});
 
 
 	  var make_timeline;
-	  if (condition_order.first == 'visual'){
-			// var timeline_order = [getProlificId(cond), timeline_fullscreen, demographics1, demographics2, clin_diag, PANAS_1, PSS_1, pre_audio, voladj, preload, instructions, example1, example2, sound_check, begin_practice, get_ready, practice, debrief_block, after_practice, get_ready, trial, results, filter_data, mem_instructions, memtest_vis, results_vis, mem_instructions_aud, memtest_aud, results_aud, PANAS_1, thank_you, getEndProcedure()]    
-		 var timeline_order = [getProlificId(cond), preload, memtest_vis, thank_you, getEndProcedure()]   
+	  if (condition_order.first == 'audio'){// Updated for second session
+		var timeline_order = [timeline_fullscreen, demographics1, demographics2, clin_diag, PANAS_1, PSS_1, pre_audio, voladj, preload, instructions, example1, example2, sound_check, begin_practice, get_ready, practice, debrief_block, after_practice, get_ready, trial, results, filter_data, mem_instructions, memtest_vis, results_vis, mem_instructions_aud, memtest_aud, results_aud, PANAS_1, thank_you, getEndProcedure()]    
+		//  var timeline_order = [preload, memtest_vis, thank_you, getEndProcedure()]   
 	} else {
-		    // var timeline_order = [getProlificId(cond), timeline_fullscreen, demographics1, demographics2, clin_diag, PANAS_1, PSS_1, pre_audio, voladj, preload, instructions, example1, example2, sound_check, begin_practice, get_ready, practice, debrief_block, after_practice, get_ready, trial, results, filter_data, mem_instructions_aud, memtest_aud, results_aud, mem_instructions, memtest_vis, results_vis, PANAS_1, thank_you, getEndProcedure()]   
-		 var timeline_order = [getProlificId(cond), preload, memtest_vis, thank_you, getEndProcedure()]   
+		var timeline_order = [timeline_fullscreen, demographics1, demographics2, clin_diag, PANAS_1, PSS_1, pre_audio, voladj, preload, instructions, example1, example2, sound_check, begin_practice, get_ready, practice, debrief_block, after_practice, get_ready, trial, results, filter_data, mem_instructions_aud, memtest_aud, results_aud, mem_instructions, memtest_vis, results_vis, PANAS_1, thank_you, getEndProcedure()]   
+		//  var timeline_order = [preload, memtest_vis, thank_you, getEndProcedure()]   
 
 		}
 
-// timeline_order = [getProlificId(cond), preload, get_ready, trial]
 
 	
 	jsPsych.init({
 		timeline: timeline_order,
-		// timeline:[getProlificId(cond), timeline_fullscreen, demographics1, demographics2, clin_diag, PANAS_1, PSS_1, pre_audio, voladj, preload, instructions, example1, example2, sound_check, begin_practice, get_ready, practice, debrief_block, after_practice, get_ready, trial, results, mem_instructions, memtest_vis, results_vis, mem_instructions_aud, memtest_aud, results_aud, PANAS_1, thank_you, getEndProcedure()],
-			    //  timeline: [getProlificId(cond), preload, get_ready, trial, sort, mem_instructions_aud, memtest_vis],
-			  on_trial_start: onTrialStart,  
+				  on_trial_start: onTrialStart,  
 			on_trial_finish: onFinish,
-			// on_finish: onFinish,
-    	
-	    // on_finish: onExpFinish,
 
-		// 	var d = new Date(); 
-		// 	var on = d.getTime();
-		// 	console.log('timestamp onset', on)
-		// 	jsPsych.data.addProperties({onset:on});
-		// },
-		// on_trial_finish: function(){
-		// 	var d = new Date(); 
-		// 	var off = d.getTime();
-		// 	console.log('timestamp offset', off)
-		// 	jsPsych.data.addProperties({offset: off});
-		// },
-
-		// on_finish: function () {
-		// 	// combine the subject ID with the file extension (and any other text) to dynamically create the file name
-		// 	var file_name = 'subject_' + subjectId + '_data.csv';
-		// 	// save the data with this file name
-		// 	jsPsych.data.get().localSave('csv',file_name);
-		//   }
 	});
 
 	  psiTurk.saveData();
 
-   }); // for window....
+    }); // for window....
 
 
 

@@ -97,6 +97,7 @@ var PsiTurk = function(uniqueId, adServerLoc, mode) {
 			ed.push({'eventtype': eventtype, 'value': value, 'timestamp': timestamp, 'interval': interval});
 			this.set('eventdata', ed);
 		}
+
 	});
 
 
